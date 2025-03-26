@@ -96,7 +96,8 @@
   "experience": [
     {
       "company": "Allegis Group, Switzerland",
-      "dates": "Jun, 2022 -",
+      "start_date": "Jun, 2022",
+      "end_date": "Nov, 2022",
       "client": "Zurich Insurance, Switzerland",
       "role": "Java Senior Software Engineer",
       "description": [
@@ -111,7 +112,8 @@
     },
     {
       "company": "EPAM Gmbh, Switzerland",
-      "dates": "Aug, 2020 – Jun, 2022",
+      "start_date": "Aug, 2020",
+      "end_date": "Jun, 2022",
       "client": "UBS AG, Switzerland",
       "role": "Contractor Software Engineer",
       "description": [
@@ -125,12 +127,120 @@
     {
       "company": "Ciorici Consulting LLC, PA, USA",
       "dates": "Oct, 2018 – March 2020",
+      "start_date": "Oct, 2018",
+      "end_date": "Mar, 2020",
       "client": "Comcast, PA, USA",
       "role": "Contractor Software Engineer at Comcast",
       "description": [
         "Successfully implemented a software product following a provided design for a cloud network provider and successfully launched the product: SD-WAN (Software Defined Wide Area Network) in production. We used Java SE 8 and the plugin design pattern for the kernel services.",
         "Successfully proposed improvements in the design to address some production issues: implemented using the strategy pattern."
       ]
+    },
+
+    {
+      "company": "Endava Inc",
+      "location": null,
+      "start_date": "2018",
+      "end_date": "2018",
+      "client": "UK Financial Services Company",
+      "title": "Software Engineer",
+      "description": [
+        "• Interacted with the client and designed Technical design document from Business Requirements for the development team.\n",
+        "• Responsible for Sequence Diagrams and Class Diagrams creation.",
+        "• Utilized Core Java concepts such as multithreading, collections, garbage collection and other JEE technologies during development phase and used different design patterns.\n",
+        "• Implemented Single Sign-On functionality using SAML and OAuth 2.0.\n",
+        "• Designed and implemented authentication and authorization functionality using SAML and, XACML.\n",
+        "• Designed and implemented SOAP Web Services.\n",
+        "• Developed server side code layer responsible for the business logic, which included integration with external service calls (to get data from legacy systems).\n",
+        "• Responsible for continuous source code security scans and enforcing security standards throughout the entire solution implementation.\n",
+        "• Unit, integration testing and bug fixing using JUnit, Mockito, AssertJ, JBehave.\n",
+        "• Upheld program quality and overall delivery standards in developing software solutions.\n",
+        "• Responsible for fine-tuning the framework to meet the performance standards.\n",
+        "• Technologies used: Java, PL/SQL, Spring, JPA, Apache Camel, IBM MQ, Hibernate, Flyway, Weblogic, Oracle 12c."
+      ]
+
+
+    },
+    {
+      "company": "Endava Inc",
+      "location": null,
+      "start_date": "2016",
+      "end_date": "2018",
+      "client": "Major Global Card Scheme",
+      "title": "Software Engineer",
+      "description": [
+        "• Developed the concept for immediate payments within the MasterCard Settlement System.\n",
+        "• Responsible for the implementation of business stories, writing functional unit tests and integration tests using remote webservers.\n",
+        "• Implemented the designed RESTful services specification APIs and implemented additional internationalization functionality.\n",
+        "• Re-designed and implemented the adapter for the I18n of the PayByBank App, which uses inter-account payments under the IPS framework in UK.\n",
+        "• Contributed to adding new functionality to the synchronous Adapter from ISO8583 to ISO020022.\n",
+        "• Augmented the stub functionalities for the Acquirer and CFI to be able to accept the newly implemented CORE features.\n",
+        "• Generified the classes to be able to accept other currencies.\n",
+        "• Implemented the possibility for the partial authorization and partial approval.\n",
+        "• Transitioned the payments system from using the FPAN to DPAN (Digital Personal Account Number), which completely eliminated the customer’s sensitive or personal information from the transaction flows.\n",
+        "• Added new validation rules and SOAP web services.\n",
+        "• Communicated extensively with business analysis to understand the specifications as well as testers to understand how to fix the bugs."
+      ]
+    },
+    {
+      "company": "ASCOM Holding SA",
+      "location": null,
+      "start_date": "2014",
+      "end_date": "2016",
+      "client": "Tristan Oil / Major Insurance Company",
+      "title": null,
+      "description": [
+        "•Developed macros in VBA (Visual Basic for Applications) for a PSC (Production Sharing Contract) in the oil field for Economic analysis and reporting   \n",
+        "•Finance specialist for the oil field, responsible for the economic analysis of the oil field and the reporting to the self proclaimed Goverment of Kurdistan in Iraq.\n"
+      ]
+    },
+    {
+      "company": "MoldATSA SE",
+      "dates": "2010 – 2014",
+      "client": "MoldATSA, EUROCONTROL, European Commission",
+      "role": "Consultant, Head of Strategy and Development",
+      "description": [
+        "Responsible for the integration and interoperability of Air Navigation Equipment, specifically ATM systems VCS, DVOR, NDBs, multilateration, ILS (2nd category), SSR, PSR as well as Meteo equipment.\n",
+        "• Team lead in a group of 5 people.\n",
+        "• Acquainted with the modular design patterns implemented by the Swedish company SiATM to develop the best in class software for ATM (Air Traffic Management).\n",
+        "• Responsible for the design and development of the Business Contingency Plan under the constraints of the European Commission and EUROCONTROL using the R and Python programming language.\n",
+        "• Used R for traffic forecast for Chisinau FIR (Flight Information Region) and facilitated the division of operations into Cost Centers for the UR (Unit Rate) adjustments.\n",
+        "• Developed the LSIP plan and provided technical support for homologating software for the AIS (Air Information Service) bulletin.\n",
+        "• Drafted, negotiated and defended the Unit Rates (MoldATSA main source of revenue) at the European Commission and EUROCONTROL. Having benefited from the skills of my teammates, Moldova achieved a historical revenue thanks to an increase in UR combined with new opened routes crossing the FIR Chisinau.\n"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "State University of Moldova, Alma Mater",
+      "degree": "Masters of Science in Mathematics",
+      "thesis": "Applications of Markovian Processes and Latent Parameters Estimation in Hidden Markov Models"
+    },
+    {
+      "institution": "Albert Ludwigs University, Freiburg, Germany",
+      "degree": "Master’s degree, IMP",
+      "dates": "2008-2010",
+      "concentration": "Computer Science and Economics"
+    },
+    {
+      "institution": "Clemson University, SC, USA",
+      "dates": "2004-2005",
+      "degree": "Exchange Student - US Department of State Scholarship for 2 semesters"
+    },
+    {
+      "institution": "ASEM, Chisinau, Moldova",
+      "degree": "Economics, International Economic Relations",
+      "dates": "2002-2006"
+    }
+  ],
+  "publications": [
+    {
+      "title": "A. Vrabie “Estimating the transition probability matrix in the Hidden Markovian Models”",
+      "journal": "Mathematics & Information Technologies: Research and Education (MITRE-2016)",
+      "pages": "71",
+      "isbn": "978-9975-71-794-6",
+      "location": "Chisinau",
+      "year": "2016"
     }
   ]
 }
