@@ -1,0 +1,85 @@
+{
+  "name": "Adrian Vrabie",
+  "title": "Java Software Engineer",
+  "contact": {
+    "phone": [
+      "+41 762575204 (CH)",
+      "+1 484 6950242 (US)",
+      "+373 79816002 (MD)"
+    ],
+    "email": "mr.vrabie@gmail.com",
+    "social": {
+      "stackoverflow": "https://stackoverflow.com/users/959876/moldovean"
+    }
+  },
+  "skills": {
+    "programming_languages": [
+      "Java SE/EE (v. 8+)",
+      "Python",
+      "C",
+      "PL/SQL",
+      "Julia",
+      "R",
+      "SQL",
+      "STATA",
+      "Kotlin",
+      "Turbo Pascal"
+    ],
+    "java_frameworks": [
+      "Spring-Boot",
+      "Spring-Security",
+      "Reactor Webflux",
+      "Spring-Data",
+      "JMS",
+      "Spring MVC",
+      "JAX-RS",
+      "Spring security",
+      "Spring cloud",
+      "Quarkus"
+    ],
+    "tech_stack": [
+      "Azure",
+      "Azure-WS",
+      "Cosmos DB",
+      "MTLS",
+      "Apache Camel",
+      "JAX-RS",
+      "JWT",
+      "SAML",
+      "OAuth2.0",
+      "JSON-B",
+      "Junit",
+      "JSR343-JMS (ActiveMQ, IBM MQ)",
+      "JSR338-JPA (Hibernate)",
+      "JSR-331 (Constraint Optimization)",
+      "ELK stack",
+      "Swagger/Open-api",
+      "Rancher",
+      "Websockets"
+    ],
+    "package_management": [
+      "Maven",
+      "Gradle"
+    ],
+    "version_control": [
+      "GIT",
+      "SVN"
+    ],
+    "databases": [
+      "Oracle",
+      "Postgres",
+      "H2 (dev)",
+      "Cassandra",
+      "Mongo DB"
+    ],
+    "containerization": [
+      "Docker",
+      "Podman"
+    ],
+    "orchestration": [
+      "K8s",
+      "docker-compose"
+    ]
+  },
+  "summary": "Over 8+ years of experience in Object-Oriented analysis/design and development in"
+}
