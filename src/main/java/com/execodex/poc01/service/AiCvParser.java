@@ -53,7 +53,7 @@ public class AiCvParser {
 
 
         SystemMessage systemMessage = new SystemMessage("You are a software engineer, that takes some text as input which includes information of a person's CV. You need to parse the CV and return the parsed information. Render the CV in a JSON format");
-        UserMessage userMessage = new UserMessage(text.substring(0,1000));
+        UserMessage userMessage = new UserMessage(text.substring(0,5000));
 
 
         ChatClient.ChatClientRequestSpec requestSpec = chatClient.prompt(new Prompt(systemMessage, userMessage));
