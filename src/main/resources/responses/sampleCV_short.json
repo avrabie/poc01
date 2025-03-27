@@ -4,8 +4,7 @@
     "title": "Java Software Engineer",
     "phone_numbers": [
       "+41 762575204 (CH)",
-      "+1 484 6950242 (US)",
-      "+373 79816002 (MD)"
+      "+373 7928987 (MD)"
     ],
     "email": "mr.vrabie@gmail.com",
     "social_media": {
@@ -23,25 +22,12 @@
       "Spring-Boot",
       "Spring-Security",
       "Reactor Webflux",
-      "Spring-Data",
-      "JMS",
-      "Spring MVC",
       "Quarkus"
     ],
     "technologies": [
       "Azure",
       "MTLS",
       "Apache Camel",
-      "JAX-RS",
-      "SAML",
-      "OAuth2.0",
-      "JSON-B",
-      "Junit",
-      "JSR343-JMS (ActiveMQ, IBM MQ)",
-      "JSR338-JPA (Hibernate)",
-      "JSR-331 (Constraint Optimization)",
-      "ELK stack",
-      "Rancher",
       "Websockets"
     ],
     "package_management": [
@@ -70,10 +56,7 @@
   },
   "summary": [
     "Over 8+ years of experience in Object-Oriented analysis/design and development in Java and J2EE (Servlets, JNDI, EJB, RMI, JPA, JMS) using non-blocking I/O features and multithreading.",
-    "Working experience on complete Project life cycle from Software Requirement Specification (SRS) to Operations and Maintenance.",
-    "Experience in developing plugins for SD-WAN cloud providers.",
-    "Experience in applying Gradient Descend, Markovian chains, Dynamic Programming algorithms.",
-    "Good knowledge of code version control systems and best practices in GIT."
+    "Working experience on complete Project life cycle from Software Requirement Specification (SRS) to Operations and Maintenance."
   ],
   "experience": [
     {
@@ -85,11 +68,7 @@
       "description": [
         "Successfully developed Calculator Search product for Zurich Insurance and deployed it to Prod. It is currently being used by two external clients. The product allows to search any vehicle by the swiss number plate.",
         "Main Tech used: Java 11, Reactor Project for async, docker containers, Cosmos DB , H2 used as a DS, event listeners, Azure storage.",
-        "Created pipelines for Azure for deployment, terraform scripts for infrastructure as code.",
-        "Created Vnets, DZones, private endpoints, learned how to manage them in resource groups, contributed to writing terraform groups, adjusted firewall rules to unblock the development. Learned about RUs from Azure and how they impact Data loading.",
-        "Successfully developed and deployed the DataLoader microservice into Azure and exposed its API only to internal Zurich network.",
-        "Took the initiative to revamp the architecture: changed Serverless Functions to a normal Srping Boot app in a simple container and understood thoroghly the limits and perills of the serverless functions in Azure.",
-        "Started developing a new product: PvTools. Used Azure Graph API (not GraphQL) to query and update actuary models written in Microsoft Excel and expose them as a webservice to the outside world. (POC done). Used the same tech stack as above plus Graph Api form MSFT."
+        "Created pipelines for Azure for deployment, terraform scripts for infrastructure as code."
       ]
     },
     {
@@ -101,9 +80,8 @@
       "description": [
         "Successfully developed from zero a product (Resurce provider from OAuth2 flow) for UBS, related for the digitalization of documents, and deployed it to Production (PROD: 6/15/2020) on PCF *Pivotal Cloud Foundry.",
         "Integrated my product to be able to communicate with other components and services at UBS: IdP, Authorization providers,  Enerprise Valut Architectures etc.",
-        "Used spring security and customized it accordingly. *including providing custom Authorization and Authentication providers that would be compatible with some UBS components that pretend to be using OAuth2.",
-        "This involved working with trust stores, private keys, establishing mTLS communication between services and other overkill security stuff. In case you are wondering, yes, Even inside the same network zone.",
-        "Working now on a different project within UBS, based on a template from UBS. *working on Security and data models and schema for the db."
+        "Used spring security and customized it accordingly. *including providing custom Authorization and Authentication providers that would be compatible with some UBS components that pretend to be using OAuth2."
+
       ]
     },
     {
