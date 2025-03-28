@@ -1,6 +1,7 @@
 package com.execodex.poc01.controller;
 
 import com.execodex.poc01.model.CvData;
+import com.execodex.poc01.model.CvData2;
 import com.execodex.poc01.service.AiCvParser;
 import com.execodex.poc01.service.CvParserService;
 import com.execodex.poc01.service.ReactivePdfParser;
@@ -99,7 +100,7 @@ public class FileUploadController {
     }
 
     @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<ResponseEntity<String>> processCv2(@RequestPart("file") FilePart filePart) {
+    public Mono<ResponseEntity<CvData2>> processCv2(@RequestPart("file") FilePart filePart) {
         Path filePath = UPLOAD_DIR.resolve(filePart.filename());
 
         return DataBufferUtils.write(filePart.content(), filePath,

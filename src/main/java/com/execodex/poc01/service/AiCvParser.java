@@ -1,5 +1,8 @@
 package com.execodex.poc01.service;
 
+import com.execodex.poc01.model.CvData2;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -24,6 +27,7 @@ public class AiCvParser {
     private static final Path UPLOAD_DIR = Paths.get("uploads");
     private final ChatClient chatClient;
     private final ReactivePdfParser pdfParser;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public AiCvParser(ChatClient.Builder builder, ReactivePdfParser pdfParser) {
         this.chatClient = builder
@@ -63,7 +67,7 @@ public class AiCvParser {
 
     }
 
-    public Mono<String> parseCv2(String text) {
+    public Mono<CvData2> parseCv2(String text) {
 
 //        Path filePath = UPLOAD_DIR.resolve("iaka.pdf");
 
@@ -164,13 +168,25 @@ public class AiCvParser {
         int size = Math.min(text.length(), 5000);
         UserMessage userMessage = new UserMessage(text.substring(0, size));
 
-        ChatClient.ChatClientRequestSpec requestSpec = chatClient.prompt(new Prompt(systemMessage, userMessage));
+        Prompt prompt = new Prompt(systemMessage, userMessage);
+//        Prompt prompt = new Prompt(systemMessage, userMessage);
+        ChatClient.ChatClientRequestSpec requestSpec = chatClient.prompt(prompt);
 
         ChatClient.CallResponseSpec call = requestSpec.call();
         Mono<String> tMono = Mono.defer(() -> Mono.just(requestSpec.call().content()))
                 .subscribeOn(Schedulers.boundedElastic());
+        Mono<CvData2> cvData2Mono = tMono.map(str -> str.replaceAll("```json", "")
+                        .replaceAll("```", ""))
+                .flatMap(str -> {
+                    try {
+                        return Mono.just(objectMapper.readValue(str, CvData2.class));
+                    } catch (JsonProcessingException e) {
+                        log.error("Failed to parse JSON: {}", str, e);
+                        return Mono.error(e);
+                    }
+                });
 
-        return tMono;
+        return cvData2Mono;
     }
 
 
