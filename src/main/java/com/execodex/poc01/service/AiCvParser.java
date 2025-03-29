@@ -26,13 +26,12 @@ import java.nio.file.Paths;
 public class AiCvParser {
 
 
-    @Value("classpath:prompts/cvParserPrompt.st")
-    private Resource cvParserResource;
-
     private static final Path UPLOAD_DIR = Paths.get("uploads");
     private final ChatClient chatClient;
     private final ReactivePdfParser pdfParser;
     private final ObjectMapper objectMapper = new ObjectMapper();
+    @Value("classpath:prompts/cvParserPrompt.st")
+    private Resource cvParserResource;
 
     public AiCvParser(ChatClient.Builder builder, ReactivePdfParser pdfParser) {
         this.chatClient = builder
@@ -82,11 +81,11 @@ public class AiCvParser {
         Prompt prompt = new Prompt(systemMessage, userMessage);
 //        Prompt prompt = new Prompt(systemMessage, userMessage);
         ChatClient.ChatClientRequestSpec requestSpec = chatClient.prompt(prompt);
-
-        ChatClient.CallResponseSpec call = requestSpec.call();
-        Mono<String> tMono = Mono.defer(() -> Mono.just(requestSpec.call().content()))
-                .subscribeOn(Schedulers.boundedElastic());
-        Mono<CvData2> cvData2Mono = tMono.map(str -> str.replaceAll("```json", "")
+        // Call the chat client and get the response
+        Mono<CvData2> cvData2Mono = Mono.defer(() ->
+                        Mono.just(requestSpec.call().content()))
+                .subscribeOn(Schedulers.boundedElastic())
+                .map(str -> str.replaceAll("```json", "")
                         .replaceAll("```", ""))
                 .flatMap(str -> {
                     try {
