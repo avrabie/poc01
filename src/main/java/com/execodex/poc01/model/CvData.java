@@ -9,7 +9,7 @@ import java.util.List;
 public class CvData {
     private PersonalInformation personal_information;
     private Skills skills;
-    private List<String> summary;
+    private List<String> summary; //todo change to String
     private List<Experience> experience;
     private List<Education> education;
     private List<Publication> publications;
@@ -26,6 +26,7 @@ public class CvData {
         public static class SocialMedia {
             private String stackoverflow;
             private String github;
+            private String linkedin;
         }
     }
 

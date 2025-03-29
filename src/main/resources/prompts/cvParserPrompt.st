@@ -8,7 +8,8 @@ You are a professional CV parser. Transform raw txt CV information into JSON, tr
                     "email": string,
                     "social_media": {
                       "stackoverflow": string,
-                      "github": string
+                      "github": string,
+                      "linkedin": string
                     }
                   },
                   "skills": {
