@@ -1,6 +1,6 @@
 package com.execodex.poc01.controller;
 
-import com.execodex.poc01.model.CvData2;
+import com.execodex.poc01.model.CvData;
 import com.execodex.poc01.service.AiCvParser;
 
 import com.execodex.poc01.service.ReactivePdfParser;
@@ -79,14 +79,14 @@ public class FileUploadController {
     }
 
 
-    @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<ResponseEntity<CvData2>> processCv2(@RequestPart("file") FilePart filePart) {
+    @PostMapping(value = "/process-cv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Mono<ResponseEntity<CvData>> processCv(@RequestPart("file") FilePart filePart) {
         Path filePath = UPLOAD_DIR.resolve(filePart.filename());
 
         return DataBufferUtils.write(filePart.content(), filePath,
                         StandardOpenOption.CREATE, StandardOpenOption.WRITE)
                 .then(pdfParser.parsePdf(filePath))
-                .flatMap(text -> aiCvParser.parseCv2(text))
+                .flatMap(text -> aiCvParser.parseCv(text))
                 .map(ResponseEntity::ok)
                 .onErrorResume(e -> {
                     ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);

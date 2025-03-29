@@ -1,11 +1,9 @@
 package com.execodex.poc01.service;
 
-import com.execodex.poc01.model.CvData2;
+import com.execodex.poc01.model.CvData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -46,7 +43,7 @@ public class AiCvParser {
 
 
 
-    public Mono<CvData2> parseCv2(String text) {
+    public Mono<CvData> parseCv(String text) {
 
 
         SystemMessage systemMessage = new SystemMessage(cvParserResource);
@@ -56,14 +53,14 @@ public class AiCvParser {
         Prompt prompt = new Prompt(systemMessage, userMessage);
         ChatClient.ChatClientRequestSpec requestSpec = chatClient.prompt(prompt);
         // Call the chat client and get the response
-        Mono<CvData2> cvData2Mono = Mono.defer(() ->
+        Mono<CvData> cvData2Mono = Mono.defer(() ->
                         Mono.just(requestSpec.call().content()))
                 .subscribeOn(Schedulers.boundedElastic())
                 .map(str -> str.replaceAll("```json", "")
                         .replaceAll("```", ""))
                 .flatMap(str -> {
                     try {
-                        return Mono.just(objectMapper.readValue(str, CvData2.class));
+                        return Mono.just(objectMapper.readValue(str, CvData.class));
                     } catch (JsonProcessingException e) {
                         log.error("Failed to parse JSON: {}", str, e);
                         return Mono.error(e);

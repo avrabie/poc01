@@ -5,11 +5,8 @@ import lombok.Data;
 
 import java.util.List;
 
-import lombok.Data;
-import java.util.List;
-
 @Data
-public class CvData2 {
+public class CvData {
     private PersonalInformation personal_information;
     private Skills skills;
     private List<String> summary;
