@@ -1,9 +1,8 @@
 package com.execodex.poc01.controller;
 
-import com.execodex.poc01.model.CvData;
 import com.execodex.poc01.model.CvData2;
 import com.execodex.poc01.service.AiCvParser;
-import com.execodex.poc01.service.CvParserService;
+
 import com.execodex.poc01.service.ReactivePdfParser;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpStatus;
@@ -27,12 +26,10 @@ public class FileUploadController {
 
     private static final Path UPLOAD_DIR = Paths.get("uploads");
     private final ReactivePdfParser pdfParser;
-    private final CvParserService cvParserService;
     private final AiCvParser aiCvParser;
 
-    public FileUploadController(ReactivePdfParser pdfParser, CvParserService cvParserService, AiCvParser aiCvParser) {
+    public FileUploadController(ReactivePdfParser pdfParser,  AiCvParser aiCvParser) {
         this.pdfParser = pdfParser;
-        this.cvParserService = cvParserService;
         this.aiCvParser = aiCvParser;
         if (!UPLOAD_DIR.toFile().exists()) {
             UPLOAD_DIR.toFile().mkdirs();
@@ -68,7 +65,7 @@ public class FileUploadController {
                     return stringMono;
                 }))
                 .map(text -> ResponseEntity
-                        .ok("PDF parsed successfully. Text length: " + text.length()+"\n"+text))
+                        .ok("PDF parsed successfully. Text length: " + text.length() + "\n" + text))
                 .onErrorResume(e -> {
                     // Clean up failed upload
                     try {
@@ -81,23 +78,6 @@ public class FileUploadController {
                 });
     }
 
-    @PostMapping(value = "/process-cv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<ResponseEntity<CvData>> processCv(@RequestPart("file") FilePart filePart) {
-        Path filePath = UPLOAD_DIR.resolve(filePart.filename());
-
-        return DataBufferUtils.write(filePart.content(), filePath,
-                        StandardOpenOption.CREATE, StandardOpenOption.WRITE)
-                .then(pdfParser.parsePdf(filePath))
-                .flatMap(text -> cvParserService.parseCvText(text))
-                .map(ResponseEntity::ok)
-                .onErrorResume(e -> {
-                    ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-                    problem.setTitle("CV Processing Error");
-                    problem.setDetail(e.getMessage());
-                    return Mono.just(ResponseEntity.of(problem).build());
-                });
-
-    }
 
     @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<CvData2>> processCv2(@RequestPart("file") FilePart filePart) {
