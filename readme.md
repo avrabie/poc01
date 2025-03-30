@@ -6,3 +6,4 @@
 5. transformed the parsed pdf into a CvData
 6. getting repository data from github https://api.github.com/users/avrabie/repos?type=owner&sort=updated&direction=desc&per_page=5&page=1
 7. Added OpenAI API key https://platform.openai.com/api-keys
+8. qwen https://chat.qwen.ai/c/01b60ada-cf0e-4f74-92c5-3d10a3e77fe1 

@@ -50,7 +50,7 @@ public class AiCvParser {
      * @return A Mono containing the parsed CV data.
      */
 
-    public Flux<String> parseCv2(String text) {
+    public Mono<CvData> parseCv2(String text) {
         SystemMessage systemMessage = new SystemMessage(cvParserResource);
         int size = Math.min(text.length(), 5000);
         String cvText = text.substring(0, size);
@@ -74,7 +74,19 @@ public class AiCvParser {
                 })
                 .stream()
                 .content();
-        return chatResponseFlux;
+        Mono<CvData> cvDataMono = chatResponseFlux
+                .reduce(new StringBuilder(), StringBuilder::append)
+                .map(StringBuilder::toString)
+                .flatMap(str -> {
+                    try {
+                        return Mono.just(objectMapper.readValue(str, CvData.class));
+                    } catch (JsonProcessingException e) {
+                        log.error("Failed to parse JSON: {}", str, e);
+                        return Mono.error(e);
+                    }
+                });
+
+        return cvDataMono;
 
 
 

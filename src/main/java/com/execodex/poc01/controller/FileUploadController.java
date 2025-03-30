@@ -99,7 +99,7 @@ public class FileUploadController {
     }
 
     @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Flux<String> processCv2(@RequestPart("file") FilePart filePart) {
+    public Flux<CvData> processCv2(@RequestPart("file") FilePart filePart) {
         Path filePath = UPLOAD_DIR.resolve(filePart.filename());
 
         return DataBufferUtils.write(filePart.content(), filePath,
