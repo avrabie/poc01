@@ -96,4 +96,22 @@ public class FileUploadController {
                 });
 
     }
+
+    @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Mono<ResponseEntity<String>> processCv2(@RequestPart("file") FilePart filePart) {
+        Path filePath = UPLOAD_DIR.resolve(filePart.filename());
+
+        return DataBufferUtils.write(filePart.content(), filePath,
+                        StandardOpenOption.CREATE, StandardOpenOption.WRITE)
+                .then(pdfParser.parsePdf(filePath))
+                .flatMap(text -> aiCvParser.parseCv2(text).singleOrEmpty())
+                .map(ResponseEntity::ok)
+                .onErrorResume(e -> {
+                    ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+                    problem.setTitle("CV Processing Error");
+                    problem.setDetail(e.getMessage());
+                    return Mono.just(ResponseEntity.of(problem).build());
+                });
+
+    }
 }

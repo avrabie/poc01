@@ -9,9 +9,12 @@ import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
@@ -40,12 +43,35 @@ public class AiCvParser {
 
     }
 
+    /**
+     * Parses the CV text using the AI chat client.
+     *
+     * @param text The CV text to parse.
+     * @return A Mono containing the parsed CV data.
+     */
 
+    public Flux<String> parseCv2(String text) {
+        SystemMessage systemMessage = new SystemMessage(cvParserResource);
+        int size = Math.min(text.length(), 1000);
+        UserMessage userMessage = new UserMessage(text.substring(0, size));
+        BeanOutputConverter<CvData> cvDataBeanOutputConverter = new BeanOutputConverter<>(new ParameterizedTypeReference<CvData>() {
+        });
+        Flux<String> flux = this.chatClient.prompt()
+                .user(u -> u.text("""
+                        Generate a cv for a software engineer.
+                        {format}
+                      """)
+//                        .param("format", cvDataBeanOutputConverter.getFormat())
+                )
+                .stream()
+                .content();
+        return flux;
+
+
+    }
 
 
     public Mono<CvData> parseCv(String text) {
-
-
         SystemMessage systemMessage = new SystemMessage(cvParserResource);
         int size = Math.min(text.length(), 5000);
         UserMessage userMessage = new UserMessage(text.substring(0, size));
