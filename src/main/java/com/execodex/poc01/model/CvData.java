@@ -33,7 +33,7 @@ public class CvData {
     @Data
     public static class Skills {
         private List<String> programming_languages;
-        private List<String> java_frameworks;
+        private List<String> frameworks;
         private List<String> technologies;
         private List<String> package_management;
         private List<String> version_control;

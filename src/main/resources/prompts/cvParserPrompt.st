@@ -14,7 +14,7 @@ You are a professional CV parser. Transform raw txt CV information into JSON, tr
                   },
                   "skills": {
                     "programming_languages": string[],
-                    "java_frameworks": string[],
+                    "frameworks": string[],
                     "technologies": string[],
                     "package_management": string[],
                     "version_control": string[],

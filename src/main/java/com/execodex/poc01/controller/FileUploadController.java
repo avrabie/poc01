@@ -13,6 +13,7 @@ import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
@@ -98,20 +99,13 @@ public class FileUploadController {
     }
 
     @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Mono<ResponseEntity<String>> processCv2(@RequestPart("file") FilePart filePart) {
+    public Flux<String> processCv2(@RequestPart("file") FilePart filePart) {
         Path filePath = UPLOAD_DIR.resolve(filePart.filename());
 
         return DataBufferUtils.write(filePart.content(), filePath,
                         StandardOpenOption.CREATE, StandardOpenOption.WRITE)
                 .then(pdfParser.parsePdf(filePath))
-                .flatMap(text -> aiCvParser.parseCv2(text).singleOrEmpty())
-                .map(ResponseEntity::ok)
-                .onErrorResume(e -> {
-                    ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-                    problem.setTitle("CV Processing Error");
-                    problem.setDetail(e.getMessage());
-                    return Mono.just(ResponseEntity.of(problem).build());
-                });
+                .flatMapMany(text -> aiCvParser.parseCv2(text));
 
     }
 }

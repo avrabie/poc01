@@ -52,20 +52,30 @@ public class AiCvParser {
 
     public Flux<String> parseCv2(String text) {
         SystemMessage systemMessage = new SystemMessage(cvParserResource);
-        int size = Math.min(text.length(), 1000);
-        UserMessage userMessage = new UserMessage(text.substring(0, size));
-        BeanOutputConverter<CvData> cvDataBeanOutputConverter = new BeanOutputConverter<>(new ParameterizedTypeReference<CvData>() {
+        int size = Math.min(text.length(), 5000);
+        String cvText = text.substring(0, size);
+        String userText = """
+                You are a software engineer, that takes some text as input which includes information of a person's CV. 
+                You need to parse the CV and return the parsed information. Render the CV in a JSON format
+                {cvText}
+                {format}
+                """;
+
+        BeanOutputConverter<CvData> converter = new BeanOutputConverter<>(new ParameterizedTypeReference<CvData>() {
         });
-        Flux<String> flux = this.chatClient.prompt()
-                .user(u -> u.text("""
-                        Generate a cv for a software engineer.
-                        {format}
-                      """)
-//                        .param("format", cvDataBeanOutputConverter.getFormat())
-                )
+        Flux<String> chatResponseFlux = this
+                .chatClient
+                .prompt()
+//                .system(cvParserResource)
+                .user(promptUserSpec -> {
+                    promptUserSpec.text(userText);
+                    promptUserSpec.param("cvText", cvText);
+                    promptUserSpec.param("format", converter.getFormat());
+                })
                 .stream()
                 .content();
-        return flux;
+        return chatResponseFlux;
+
 
 
     }
