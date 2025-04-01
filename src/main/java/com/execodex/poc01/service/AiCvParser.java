@@ -54,9 +54,11 @@ public class AiCvParser {
         SystemMessage systemMessage = new SystemMessage(cvParserResource);
         int size = Math.min(text.length(), 5000);
         String cvText = text.substring(0, size);
+
         String userText = """
                 You are a software engineer, that takes some text as input which includes information of a person's CV. 
-                You need to parse the CV and return the parsed information. Render the CV in a JSON format
+                You need to parse the CV and return the parsed information. Render the CV in a JSON format.
+                Follow the format strictly and do not add any extra information.
                 {cvText}
                 {format}
                 """;

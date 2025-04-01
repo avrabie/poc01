@@ -80,6 +80,7 @@ public class FileUploadController {
     }
 
 
+    // Gemini AI Chat API
     @PostMapping(value = "/process-cv", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<CvData>> processCv(@RequestPart("file") FilePart filePart) {
         Path filePath = UPLOAD_DIR.resolve(filePart.filename());
@@ -98,6 +99,7 @@ public class FileUploadController {
 
     }
 
+    //OpenAI Chat API
     @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Flux<CvData> processCv2(@RequestPart("file") FilePart filePart) {
         Path filePath = UPLOAD_DIR.resolve(filePart.filename());

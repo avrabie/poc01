@@ -1,6 +1,7 @@
 package com.execodex.poc01.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class CvData {
     }
 
     @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Skills {
         private List<String> programming_languages;
         private List<String> frameworks;
