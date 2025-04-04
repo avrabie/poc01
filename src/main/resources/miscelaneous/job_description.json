@@ -1,0 +1,51 @@
+{
+  "jobTitle": "Software Engineer - Java Microservices",
+  "requiredSkills": {
+    "programmingLanguages": ["Java"],
+    "frameworks": ["Spring Boot", "Spring Cloud", "Spring Framework"],
+    "architecture": ["Microservices"],
+    "apiDevelopment": ["RESTful APIs"],
+    "containerization": ["Docker"],
+    "orchestration": ["Kubernetes"],
+    "databases": ["PostgreSQL", "MongoDB"],
+    "developmentMethodologies": ["Agile", "Scrum"]
+  },
+  "requiredExperience": {
+    "yearsOfExperience": 3,
+    "experienceWith": [
+      "Java software development",
+      "Microservices architecture design and development",
+      "Spring ecosystem",
+      "Containerization technologies",
+      "Database integration"
+    ]
+  },
+  "preferredSkills": {
+    "cloudPlatforms": ["AWS", "Azure", "Google Cloud"],
+    "ciCdTools": ["Jenkins", "GitLab CI"],
+    "versionControl": ["Git"],
+    "monitoringTools": ["Prometheus", "ELK stack"],
+    "security": ["Microservices security best practices"]
+  },
+  "softSkills": [
+    "Problem-solving",
+    "Attention to detail",
+    "Communication",
+    "Teamwork"
+  ],
+  "education": {
+    "degree": "Bachelor's",
+    "field": ["Computer Science", "Software Engineering", "Related field"]
+  },
+  "responsibilities": [
+    "Design and implement microservices applications",
+    "Collaborate with cross-functional teams",
+    "Write clean, maintainable code",
+    "Conduct code reviews",
+    "Deploy microservices using containerization",
+    "Implement RESTful APIs",
+    "Monitor application performance",
+    "Participate in Agile/Scrum ceremonies",
+    "Stay current with industry trends"
+  ]
+}
