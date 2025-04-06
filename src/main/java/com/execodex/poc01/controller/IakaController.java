@@ -2,6 +2,7 @@ package com.execodex.poc01.controller;
 
 import com.execodex.poc01.model.CvData;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -22,7 +23,9 @@ public class IakaController {
     private Resource cvParserResource;
 
     public IakaController(ChatClient.Builder chatClientBuilder) {
-        chatClient = chatClientBuilder.build();
+        chatClient = chatClientBuilder
+                .defaultOptions(ChatOptions.builder().temperature(0.0d).build())
+                .build();
     }
 
     @GetMapping("/github/{username}")
@@ -68,7 +71,7 @@ public class IakaController {
                         .content();
     }
 
-    @PostMapping("/ai/client")
+    @GetMapping(value = "/ai/client")
     Flux<String> generation2(@RequestBody String inquiry) {
         return
                 this.chatClient.prompt()

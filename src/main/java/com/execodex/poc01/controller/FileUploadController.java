@@ -119,22 +119,20 @@ public class FileUploadController {
     public Flux<String> processJobDescription(@RequestBody String jobDescription) {
         return aiJobParser.parseJob(jobDescription)
                 .doOnNext(result -> {;
-                    // Emit the result to the sink
                     sink.tryEmitNext(result);
                 })
                 .doOnError(error -> {
-                    // Handle error and emit an error message to the sink
+                    // Handle errors here, otherwise emit an error to the sink
                     sink.tryEmitError(error);
                 })
                 .doFinally(signalType -> {
-                    // Complete the sink when processing is done
                     sink.tryEmitComplete();
                 });
     }
 
     @GetMapping(value = "/results", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> getJobResults() {
-        return sink.asFlux(); // Return the sink's Flux for subscribers
+        return sink.asFlux();
     }
 
 }
