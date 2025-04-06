@@ -1,75 +1,56 @@
 package com.execodex.poc01.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class JobDescription {
-    private String jobTitle;
-    private RequiredSkills requiredSkills;
-    private RequiredExperience requiredExperience;
-    private PreferredSkills preferredSkills;
-    private SoftSkills softSkills;
-    private Education education;
+    private JobInformation jobInformation;
+    private Requirements requirements;
     private List<String> responsibilities;
+    private List<String> benefits;
+
 
     @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class RequiredSkills {
-        private List<String> programmingLanguages;
-        private List<String> frameworks;
-        private List<String> architecture;
-        private List<String> apiDevelopment;
-        private List<String> containerization;
-        private List<String> orchestration;
-        private List<String> databases;
-        private List<String> developmentMethodologies;
+    public static class JobInformation {
+        private String jobTitle;
+        private String company;
+        private String location;
+        private Boolean remoteOption;
+        private String employmentType;
+        private String salaryRange;
+
+
     }
 
     @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class RequiredExperience {
-        private int yearsOfExperience;
-        private List<String> experienceWith;
-    }
+    public static class Requirements {
+        private MustHave mustHave;
+        private NiceToHave niceToHave;
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class PreferredSkills {
-        private List<String> cloudPlatforms;
-        private List<String> ciCdTools;
-        private List<String> versionControl;
-        private List<String> monitoringTools;
-        private List<String> security;
-    }
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class SoftSkills {
-        private List<String> skills;
-    }
+        @Data
+        public static class MustHave {
+            private List<String> skills;
+            private List<String> technologies;
+            private List<String> education;
+            private String experienceLevel;
+            private String yearsOfExperience;
+            private List<String> certifications;
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Education {
-        private String degree;
-        private List<String> field;
+
+        }
+
+        @Data
+        public static class NiceToHave {
+            private List<String> skills;
+            private List<String> technologies;
+            private List<String> certifications;
+
+        }
     }
 }

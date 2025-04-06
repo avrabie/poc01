@@ -1,10 +1,13 @@
 package com.execodex.poc01.controller;
 
 import com.execodex.poc01.model.CvData;
+import com.execodex.poc01.model.JobDescription;
 import com.execodex.poc01.service.AiCvParser;
 
 import com.execodex.poc01.service.AiJobParserService;
 import com.execodex.poc01.service.ReactivePdfParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,6 +33,7 @@ public class FileUploadController {
     private final AiCvParser aiCvParser;
     private final AiJobParserService aiJobParser;
     private final Sinks.Many<String> sink;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public FileUploadController(ReactivePdfParser pdfParser, AiCvParser aiCvParser, AiJobParserService aiJobParser) {
         this.pdfParser = pdfParser;
@@ -115,10 +119,11 @@ public class FileUploadController {
 
     }
 
-    @PostMapping(value= "/process-job-description", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> processJobDescription(@RequestBody String jobDescription) {
-        return aiJobParser.parseJob(jobDescription)
-                .doOnNext(result -> {;
+    @PostMapping(value= "/process-job-description")
+    public Mono<JobDescription> processJobDescription(@RequestBody String jobDescription) {
+        Flux<String> stringFlux = aiJobParser.parseJob(jobDescription)
+                .doOnNext(result -> {
+                    ;
                     sink.tryEmitNext(result);
                 })
                 .doOnError(error -> {
@@ -127,6 +132,20 @@ public class FileUploadController {
                 })
                 .doFinally(signalType -> {
                     sink.tryEmitComplete();
+                });
+
+
+
+                ;
+        return stringFlux
+                .reduce(new StringBuilder(), StringBuilder::append)
+                .map(StringBuilder::toString)
+                .flatMap(str -> {
+                    try {
+                        return Mono.just(objectMapper.readValue(str, JobDescription.class));
+                    } catch (JsonProcessingException e) {
+                        return Mono.error(e);
+                    }
                 });
     }
 
