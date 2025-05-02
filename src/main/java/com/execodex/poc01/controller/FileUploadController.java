@@ -109,13 +109,13 @@ public class FileUploadController {
 
     //OpenAI Chat API
     @PostMapping(value = "/process-cv-2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Flux<CvData> processCv2(@RequestPart("file") FilePart filePart) {
+    public Mono<CvData> processCv2(@RequestPart("file") FilePart filePart) {
         Path filePath = UPLOAD_DIR.resolve(filePart.filename());
 
         return DataBufferUtils.write(filePart.content(), filePath,
                         StandardOpenOption.CREATE, StandardOpenOption.WRITE)
                 .then(pdfParser.parsePdf(filePath))
-                .flatMapMany(text -> aiCvParser.parseCv2(text));
+                .flatMap(text -> aiCvParser.parseCv2(text));
 
     }
 
@@ -134,9 +134,6 @@ public class FileUploadController {
                     sink.tryEmitComplete();
                 });
 
-
-
-                ;
         return stringFlux
                 .reduce(new StringBuilder(), StringBuilder::append)
                 .map(StringBuilder::toString)
