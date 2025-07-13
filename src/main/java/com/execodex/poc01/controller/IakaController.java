@@ -24,7 +24,9 @@ public class IakaController {
 
     public IakaController(ChatClient.Builder chatClientBuilder) {
         chatClient = chatClientBuilder
-                .defaultOptions(ChatOptions.builder().temperature(0.0d).build())
+                .defaultOptions(ChatOptions.builder()
+                        .temperature(1.5d)
+                        .build())
                 .build();
     }
 
@@ -55,7 +57,7 @@ public class IakaController {
         return Mono.defer(() -> {
 
             String hi = this.chatClient.prompt()
-                    .user("hi")
+                    .user("tell me a joke about software engineering")
                     .call()
                     .content();
             return Mono.just(hi);
